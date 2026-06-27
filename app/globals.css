@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: #141414;
+  --color-foreground: #f9f9f9;
+  --color-blocks: #1f1f1f;
+  --color-inputs: #262626;
+  --color-inactive: #686868;
+  --color-destructured: #E90516;
+  --color-success: #30b94d;
+
+  --font-main: "Gilroy", sans-serif;
+  --font-secondary: "SF Pro Text", sans-serif;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-main);
+  }
+
+  input::placeholder {
+    color: var(--color-inactive);
+    font-family: var(--font-main);
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 133%;
+    letter-spacing: -0.02em;
+    text-align: center;
+    opacity: 1;
+  }
+}
+
+
+@utility container {
+  width: 100%;
+  min-width: 320px;
+  max-width: 375px;
+  padding: 20px;
+  margin: 0 auto;
+
+
+  @media only screen and (min-width: 768px) {
+    max-width: 768px;
+    padding: 32px;
+  }
+
+  @media only screen and (min-width: 1440px) {
+    max-width: 1280px;
+  }
+}
+
+
+
+@utility white-button {
+  background: var(--color-foreground);
+  color: var(--color-background);
+  font-family: var(--font-main);
+  letter-spacing: 0.02em;
+  font-weight: 700;
+  border-radius: 30px;
+}
+
+@utility black-button {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-main);
+  letter-spacing: 0.02em;
+  font-weight: 700;
+  border-radius: 30px;
+}
+
+@utility input {
+  font-family: var(--font-main);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: var(--color-foreground);
+}
