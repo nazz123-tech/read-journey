@@ -3,12 +3,11 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAuthStore } from "@/services/store/authStore";
-import { registerUser } from "@/services/api/clientApi";
+import { loginUser } from "@/services/api/clientApi";
 import { useRouter } from "next/navigation";
 import * as yup from "yup";
 
-export const registerSchema = yup.object({
-  name: yup.string().min(2, "Мінімум 2 символи").required("Імʼя обовʼязкове"),
+export const loginSchema = yup.object({
   email: yup
     .string()
     .email("Невалідний email")
@@ -20,13 +19,12 @@ export const registerSchema = yup.object({
     .required("Пароль обовʼязковий"),
 });
 
-export interface RegisterFormData {
-  name: string;
+export interface LoginFormData {
   email: string;
   password: string;
 }
 
-export const RegisterForm = () => {
+export const LoginForm = () => {
   const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
   const { setAuth } = useAuthStore();
@@ -34,12 +32,12 @@ export const RegisterForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<RegisterFormData>({
-    resolver: yupResolver(registerSchema),
+  } = useForm<LoginFormData>({
+    resolver: yupResolver(loginSchema),
   });
 
-  const onSubmit = async (data: RegisterFormData) => {
-    const res = await registerUser(data);
+  const onSubmit = async (data: LoginFormData) => {
+    const res = await loginUser(data);
     setAuth(res);
     router.push("/recommended");
   };
@@ -47,10 +45,6 @@ export const RegisterForm = () => {
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <input {...register("name")} placeholder="Name"></input>
-          {errors.name && <p>{errors.name.message}</p>}
-        </div>
         <div>
           <input {...register("email")} placeholder="Email"></input>
           {errors.email && <p>{errors.email.message}</p>}
@@ -72,7 +66,7 @@ export const RegisterForm = () => {
 
           {errors.root && <p>{errors.root.message}</p>}
         </div>
-        <button type="submit">Register</button>
+        <button type="submit">Login</button>
       </form>
     </div>
   );
