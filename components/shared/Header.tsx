@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { useAuthStore } from "@/services/store/authStore";
 import { useRouter } from "next/navigation";
 import { logoutUser } from "@/services/api/clientApi";
+import Modal from "./Modal";
 
 export const Header = () => {
   const router = useRouter();
@@ -14,8 +15,8 @@ export const Header = () => {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const handleLogout = async () => {
-    logout();
     await logoutUser();
+    logout();
     router.push("/login");
   };
 
@@ -23,12 +24,24 @@ export const Header = () => {
     <header className="">
       <div className="flex flex-row justify-between items-center">
         <Link className="flex flex-row" href={"/recommended"}>
-          <Image width={50} height={20} alt="logo" src={"/logo.png"}></Image>
+          <Image width={50} height={20} alt="logo" src={"/Logo.png"}></Image>
           <span className="hidden md:block">Read Journey</span>
         </Link>
         <nav className="hidden md:flex md:flex-row">
-          <Link href={"/recommended"}>Home</Link>
-          <Link href={"/library"}>My Library</Link>
+          <Link
+            href={"/recommended"}
+            className={
+              pathname === "/recommended" ? "underline" : "no-underline"
+            }
+          >
+            Home
+          </Link>
+          <Link
+            href={"/library"}
+            className={pathname === "/library" ? "underline" : "no-underline"}
+          >
+            My Library
+          </Link>
         </nav>
         <div className="flex flex-row items-center">
           <div className="">{user?.name?.[0]}</div>
@@ -45,17 +58,19 @@ export const Header = () => {
         </div>
       </div>
       {menuOpen && (
-        <div className="md:hidden">
-          <nav>
-            <Link href={"/recommended"} onClick={() => setMenuOpen(false)}>
-              Home
-            </Link>
-            <Link href={"/library"} onClick={() => setMenuOpen(false)}>
-              My library
-            </Link>
-            <button onClick={handleLogout}></button>
-          </nav>
-        </div>
+        <Modal onClose={() => setMenuOpen(false)} variant="menu">
+          <div className="md:hidden">
+            <nav>
+              <Link href={"/recommended"} onClick={() => setMenuOpen(false)}>
+                Home
+              </Link>
+              <Link href={"/library"} onClick={() => setMenuOpen(false)}>
+                My library
+              </Link>
+              <button onClick={handleLogout}></button>
+            </nav>
+          </div>
+        </Modal>
       )}
     </header>
   );

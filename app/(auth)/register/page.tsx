@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 export const metadata = {
   title: "Реєстрація | Read Journey",
 };
