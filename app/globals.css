@@ -9,8 +9,8 @@
   --color-destructured: #E90516;
   --color-success: #30b94d;
 
-  --font-main: "Gilroy", sans-serif;
-  --font-secondary: "SF Pro Text", sans-serif;
+  --font-main: var(--font-gilroy-light);
+  --font-title: var(--font-gilroy-bold);
 }
 
 @layer base {
@@ -21,13 +21,10 @@
   }
 
   input::placeholder {
-    color: var(--color-inactive);
     font-family: var(--font-main);
-    font-weight: 500;
-    font-size: 12px;
+    color: var(--color-foreground);
     line-height: 133%;
     letter-spacing: -0.02em;
-    text-align: center;
     opacity: 1;
   }
 }

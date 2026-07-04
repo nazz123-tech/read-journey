@@ -1,5 +1,15 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import localFont from "next/font/local";
+
+const gilroy = localFont({
+  src: "../public/fonts/Gilroy-Light.otf",
+  variable: "--font-gilroy-light",
+});
+const gilroyBold = localFont({
+  src: "../public/fonts/Gilroy-ExtraBold.otf",
+  variable: "--font-gilroy-bold",
+});
 
 export const metadata: Metadata = {
   title: "Read Journey",
@@ -12,7 +22,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`h-full antialiased`}>
+    <html
+      lang="en"
+      className={`h-full antialiased ${gilroy.variable} ${gilroyBold.variable} `}
+    >
       <body className="min-h-full flex flex-col">
         <div className="container">{children}</div>
       </body>

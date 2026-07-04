@@ -53,7 +53,7 @@ export const Header = () => {
             onClick={() => setMenuOpen((prev) => !prev)}
             className="md:hidden"
           >
-            <Image alt="menu" width={20} height={20} src={"/menu-04.svg"} />
+            <Image alt="menu" width={20} height={20} src={"/menu.svg"} />
           </button>
         </div>
       </div>
@@ -67,7 +67,7 @@ export const Header = () => {
               <Link href={"/library"} onClick={() => setMenuOpen(false)}>
                 My library
               </Link>
-              <button onClick={handleLogout}></button>
+              <button onClick={handleLogout}>Logout</button>
             </nav>
           </div>
         </Modal>
