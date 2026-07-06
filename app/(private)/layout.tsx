@@ -9,8 +9,10 @@ export default function PrivateLayout({
   return (
     <AuthGuard>
       <div className="min-h-screen bg-[#141414]">
-        <Header />
-        <main>{children}</main>
+        <div className="container w-full">
+          <Header />
+          <main>{children}</main>
+        </div>
       </div>
     </AuthGuard>
   );

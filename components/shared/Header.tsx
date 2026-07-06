@@ -14,61 +14,108 @@ export const Header = () => {
   const { user, logout } = useAuthStore();
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+
   const handleLogout = async () => {
     await logoutUser();
     logout();
     router.push("/login");
   };
 
+  const getLinkClass = (href: string) => {
+    const isActive = pathname === href;
+    return `relative pb-1 font-main font-medium transition-colors duration-200 ${
+      isActive
+        ? "text-foreground after:absolute after:bottom-0 after:left-0 after:h-[3px] after:w-full after:rounded-full after:bg-blue-500"
+        : "text-inactive hover:text-foreground"
+    }`;
+  };
+
   return (
     <header className="">
-      <div className="flex flex-row justify-between items-center">
-        <Link className="flex flex-row" href={"/recommended"}>
-          <Image width={50} height={20} alt="logo" src={"/Logo.png"}></Image>
-          <span className="hidden md:block">Read Journey</span>
+      <div className="flex flex-row justify-between px-[20px] h-14 bg-blocks rounded-2xl items-center">
+        <Link
+          className="flex flex-row h-[17px] items-center gap-1"
+          href={"/recommended"}
+        >
+          <Image
+            width={42}
+            className="hidden md:block"
+            height={17}
+            alt="logo"
+            src={"/Logo.png"}
+          />
+          <Image
+            width={42}
+            className="block md:hidden"
+            height={17}
+            alt="logo"
+            src={"/images/logo-mobile.png"}
+          />
+          <span className="hidden md:block font-title">READ JOURNEY</span>
         </Link>
-        <nav className="hidden md:flex md:flex-row">
-          <Link
-            href={"/recommended"}
-            className={
-              pathname === "/recommended" ? "underline" : "no-underline"
-            }
-          >
+
+        <nav className="hidden md:flex md:flex-row gap-8">
+          <Link href={"/recommended"} className={getLinkClass("/recommended")}>
             Home
           </Link>
           <Link
             href={"/library"}
-            className={pathname === "/library" ? "underline" : "no-underline"}
+            className={
+              getLinkClass("/library") === "/library"
+                ? getLinkClass("/library")
+                : getLinkClass("/library")
+            }
           >
             My Library
           </Link>
         </nav>
-        <div className="flex flex-row items-center">
-          <div className="">{user?.name?.[0]}</div>
+
+        <div className="flex flex-row items-center gap-[10px]">
+          <div className="flex flex-row items-center justify-center bg-inputs border rounded-full w-[35px] h-[35px] border-zinc-50/20 font-bold leading-none tracking-tight text-center font-main">
+            {user?.name?.[0]}
+          </div>
           <span className="hidden md:block">{user?.name}</span>
-          <button className="hidden md:block" onClick={handleLogout}>
+          <button
+            className="hidden md:block black-button w-[91px] h-[38px] mt-auto font-main font-bold border border-zinc-50/20 hover:bg-foreground hover:text-background hover:border-transparent"
+            onClick={handleLogout}
+          >
             Logout
           </button>
           <button
             onClick={() => setMenuOpen((prev) => !prev)}
             className="md:hidden"
           >
-            <Image alt="menu" width={20} height={20} src={"/menu.svg"} />
+            <Image alt="menu" width={28} height={28} src={"/menu.svg"} />
           </button>
         </div>
       </div>
+
       {menuOpen && (
         <Modal onClose={() => setMenuOpen(false)} variant="menu">
-          <div className="md:hidden">
-            <nav>
-              <Link href={"/recommended"} onClick={() => setMenuOpen(false)}>
+          <div className="flex flex-col items-center justify-between h-full min-h-[80vh] md:hidden">
+            <nav className="flex flex-col items-start mt-[200px] leading-[1.29] tracking-tight font-main text-[16px] justify-center gap-6">
+              <Link
+                href={"/recommended"}
+                onClick={() => setMenuOpen(false)}
+                className={getLinkClass("/recommended")}
+              >
                 Home
               </Link>
-              <Link href={"/library"} onClick={() => setMenuOpen(false)}>
+              <Link
+                href={"/library"}
+                onClick={() => setMenuOpen(false)}
+                className={getLinkClass("/library")}
+              >
                 My library
               </Link>
-              <button onClick={handleLogout}>Logout</button>
             </nav>
+
+            <button
+              className="black-button w-[91px] h-[38px] mt-auto font-main font-bold border border-zinc-50/20 hover:bg-foreground hover:text-background hover:border-transparent"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
           </div>
         </Modal>
       )}

@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
-
 const gilroy = localFont({
-  src: "../public/fonts/Gilroy-Light.otf",
-  variable: "--font-gilroy-light",
+  src: "../public/fonts/Gilroy-Medium.ttf",
+  variable: "--font-gilroy",
 });
+
 const gilroyBold = localFont({
   src: "../public/fonts/Gilroy-ExtraBold.otf",
   variable: "--font-gilroy-bold",
@@ -26,9 +26,7 @@ export default function RootLayout({
       lang="en"
       className={`h-full antialiased ${gilroy.variable} ${gilroyBold.variable} `}
     >
-      <body className="min-h-full flex flex-col">
-        <div className="container">{children}</div>
-      </body>
+      <body className="min-h-full flex flex-col items-center">{children}</body>
     </html>
   );
 }

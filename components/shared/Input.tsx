@@ -4,22 +4,46 @@ import { useState } from "react";
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
   status: "basic" | "password";
+  error?: string;
+  success?: boolean;
 }
 
-export const Input = ({ label, status, ...props }: InputProps) => {
+export const Input = ({
+  label,
+  error,
+  success,
+  status,
+  ...props
+}: InputProps) => {
   const [isVisible, setIsVisible] = useState(false);
-
+  const borderClass = error
+    ? "border border-destructured"
+    : success
+      ? "border border-success"
+      : "border border-transparent";
   return (
-    <div className="flex flex-row items-center gap-2.5 pt-3.5 pb-3.5 px-[14px] bg-inputs rounded-xl">
+    <div
+      className={`flex flex-row items-center gap-2.5 pt-3.5 pb-3.5 px-[14px] bg-inputs rounded-xl ${borderClass}`}
+    >
       <span className="text-inactive shrink-0 text-sm">{label}</span>
       <input
         {...props}
         type={
           status === "password" ? (isVisible ? "text" : "password") : props.type
         }
-        className="font-main bg-transparentv font-bold outline-none w-full text-sm"
+        className="font-main bg-transparent outline-none w-full text-sm"
       />
-      {status === "password" && (
+      {error && (
+        <span className="text-red-500  shrink-0">
+          <img src="./error.png" />
+        </span>
+      )}
+      {success && (
+        <span className="text-green-500 w-[20px] h-[20px] shrink-0 ">
+          <img src="./success.png" />
+        </span>
+      )}
+      {status === "password" && !error && !success && (
         <button
           className="w-[20px] h-[20px] scale-125"
           type="button"

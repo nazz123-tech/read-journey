@@ -9,7 +9,7 @@
   --color-destructured: #E90516;
   --color-success: #30b94d;
 
-  --font-main: var(--font-gilroy-light);
+  --font-main: var(--font-gilroy);
   --font-title: var(--font-gilroy-bold);
 }
 
@@ -55,18 +55,22 @@
   color: var(--color-background);
   font-family: var(--font-main);
   letter-spacing: 0.02em;
-  font-weight: 700;
   border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
+
 
 @utility black-button {
   background: var(--color-background);
   color: var(--color-foreground);
   font-family: var(--font-main);
   letter-spacing: 0.02em;
-  font-weight: 700;
   border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
+
 
 @utility input {
   font-family: var(--font-main);
