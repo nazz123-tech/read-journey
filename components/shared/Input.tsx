@@ -23,15 +23,17 @@ export const Input = ({
       : "border border-transparent";
   return (
     <div
-      className={`flex flex-row items-center gap-2.5 pt-3.5 pb-3.5 px-[14px] bg-inputs rounded-xl ${borderClass}`}
+      className={`flex flex-row items-center gap-2.5 pt-3.5 pb-3.5 px-[14px] bg-inputs hover:border-white/10 rounded-xl ${borderClass}`}
     >
-      <span className="text-inactive shrink-0 text-sm">{label}</span>
+      <span className="text-inactive text-xs font-medium leading-snug shrink-0 tracking-tight">
+        {label}
+      </span>
       <input
         {...props}
         type={
           status === "password" ? (isVisible ? "text" : "password") : props.type
         }
-        className="font-main bg-transparent outline-none w-full text-sm"
+        className="font-main text-xs font-medium leading-snug tracking-tight  bg-transparent outline-none w-full"
       />
       {error && (
         <span className="text-red-500  shrink-0">

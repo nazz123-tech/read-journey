@@ -1,5 +1,4 @@
 "use client";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAuthStore } from "@/services/store/authStore";
@@ -9,6 +8,7 @@ import * as yup from "yup";
 import { Input } from "../shared/Input";
 import Image from "next/image";
 import Link from "next/link";
+import { toast } from "react-toastify";
 
 export const registerSchema = yup.object({
   name: yup.string().min(2, "Мінімум 2 символи").required("Імʼя обовʼязкове"),
@@ -31,11 +31,11 @@ export interface RegisterFormData {
 
 export const RegisterForm = () => {
   const router = useRouter();
-  const [isVisible, setIsVisible] = useState(false);
   const { setAuth } = useAuthStore();
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors, touchedFields },
     watch,
   } = useForm<RegisterFormData>({
@@ -45,21 +45,35 @@ export const RegisterForm = () => {
   });
 
   const onSubmit = async (data: RegisterFormData) => {
-    const res = await registerUser(data);
-    setAuth(res);
-    router.push("/recommended");
+    try {
+      const res = await registerUser(data);
+      setAuth(res);
+      router.push("/recommended");
+    } catch (error) {
+      const err = error as Error & {
+        response?: { data?: { message?: string } };
+      };
+      const errorMessage =
+        err.response?.data?.message || "Користувача не знайдено ";
+
+      setError("root.serverError", {
+        type: "manual",
+        message: errorMessage,
+      });
+      toast.warn(`${errorMessage}`);
+    }
   };
 
   return (
-    <div className="flex flex-col bg-blocks rounded-[30px] w-[335px] px-[20px] pt-[20px] pb-[40px]">
+    <div className="flex flex-col bg-blocks rounded-[30px] w-full max-w-[335px] md:max-w-[704px] xl:max-w-[600px] md:h-[960px] px-[20px] pt-[20px] md:pt-[40.5px] pb-[40px] md:px-[64px] xl:h-[736px]">
       <Image
         src="/images/logo-mobile.png"
         alt="logo"
         width={50}
         height={20}
-        className="mb-[40px]"
+        className="mb-[40px] md:mb-[157px] xl:mb-[107px]"
       ></Image>
-      <h2 className="font-title text-[32px] mb-[20px] leading-none tracking-wide">
+      <h2 className="font-title text-[32px] mb-[20px] md:text-[64px] md:mb-[40px]  leading-none tracking-wide">
         Expand your mind, reading{" "}
         <span className="text-[rgba(227,227,227,0.5)]"> a book</span>
       </h2>
@@ -122,7 +136,7 @@ export const RegisterForm = () => {
             {errors.root.message}
           </p>
         )}
-        <div className="flex flex-row items-center gap-[14px] mtv-[20px]">
+        <div className="flex flex-row items-center gap-[14px] mt-[20px] md:mt-[82px]">
           <button
             className="white-button font-main font-bold py-3 px-11 hover:bg-inputs hover:text-foreground border hover:border-zinc-50/20"
             type="submit"

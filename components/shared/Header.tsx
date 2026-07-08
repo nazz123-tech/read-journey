@@ -31,7 +31,7 @@ export const Header = () => {
   };
 
   return (
-    <header className="">
+    <header className="mb-[10px]">
       <div className="flex flex-row justify-between px-[20px] h-14 bg-blocks rounded-2xl items-center">
         <Link
           className="flex flex-row h-[17px] items-center gap-1"
@@ -51,10 +51,10 @@ export const Header = () => {
             alt="logo"
             src={"/images/logo-mobile.png"}
           />
-          <span className="hidden md:block font-title">READ JOURNEY</span>
+          <span className="hidden xl:block font-title">READ JOURNEY</span>
         </Link>
 
-        <nav className="hidden md:flex md:flex-row gap-8">
+        <nav className="hidden md:flex md:flex-row gap-8 xl:gap-10">
           <Link href={"/recommended"} className={getLinkClass("/recommended")}>
             Home
           </Link>
@@ -70,16 +70,18 @@ export const Header = () => {
           </Link>
         </nav>
 
-        <div className="flex flex-row items-center gap-[10px]">
+        <div className="flex flex-row items-center gap-[10px] md:gap-[16px]">
           <div className="flex flex-row items-center justify-center bg-inputs border rounded-full w-[35px] h-[35px] border-zinc-50/20 font-bold leading-none tracking-tight text-center font-main">
             {user?.name?.[0]}
           </div>
-          <span className="hidden md:block">{user?.name}</span>
+          <span className="hidden xl:block font-main font-bold leading-[18px] tracking-tight text-center text-foreground">
+            {user?.name}
+          </span>
           <button
-            className="hidden md:block black-button w-[91px] h-[38px] mt-auto font-main font-bold border border-zinc-50/20 hover:bg-foreground hover:text-background hover:border-transparent"
+            className="hidden md:block black-button w-[91px] h-[38px] md:w-[114px] md:h-[42px] mt-auto font-main font-bold border border-zinc-50/20 hover:bg-foreground hover:text-background hover:border-transparent"
             onClick={handleLogout}
           >
-            Logout
+            Log out
           </button>
           <button
             onClick={() => setMenuOpen((prev) => !prev)}

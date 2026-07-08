@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ToastContainer, Bounce } from "react-toastify";
 import "./globals.css";
 import localFont from "next/font/local";
 const gilroy = localFont({
@@ -26,7 +27,22 @@ export default function RootLayout({
       lang="en"
       className={`h-full antialiased ${gilroy.variable} ${gilroyBold.variable} `}
     >
-      <body className="min-h-full flex flex-col items-center">{children}</body>
+      <body className="min-h-full flex flex-col items-center">
+        <ToastContainer
+          position="bottom-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick={false}
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+          transition={Bounce}
+        />
+        {children}
+      </body>
     </html>
   );
 }

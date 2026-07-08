@@ -1,5 +1,4 @@
 "use client";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAuthStore } from "@/services/store/authStore";
@@ -9,6 +8,7 @@ import Image from "next/image";
 import * as yup from "yup";
 import { Input } from "../shared/Input";
 import Link from "next/link";
+import { toast } from "react-toastify";
 
 export const loginSchema = yup.object({
   email: yup
@@ -34,6 +34,7 @@ export const LoginForm = () => {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors, touchedFields },
     watch,
   } = useForm<LoginFormData>({
@@ -43,21 +44,36 @@ export const LoginForm = () => {
   });
 
   const onSubmit = async (data: LoginFormData) => {
-    const res = await loginUser(data);
-    setAuth(res);
-    router.push("/recommended");
+    try {
+      const res = await loginUser(data);
+      setAuth(res);
+      router.push("/recommended");
+    } catch (error) {
+      const err = error as Error & {
+        response?: { data?: { message?: string } };
+      };
+      const errorMessage =
+        err.response?.data?.message ||
+        "Користувача не знайдено або пароль невірний";
+
+      setError("root.serverError", {
+        type: "manual",
+        message: errorMessage,
+      });
+      toast.warn(`${errorMessage}`);
+    }
   };
 
   return (
-    <div className="flex flex-col bg-blocks rounded-[30px] w-full max-w-[335px] md:max-w-[704px] px-[20px] pt-[20px] pb-[40px] md:px-[64px] md:pt-[24px] md:pb-[214px]">
+    <div className="flex flex-col bg-blocks rounded-[30px] w-full max-w-[335px] md:max-w-[704px] xl:max-w-[600px] px-[20px] pt-[20px] pb-[40px] md:px-[64px] md:pt-[40.5px] md:h-[960px] xl:h-[736px]">
       <Image
         src="/images/logo-mobile.png"
         alt="logo"
         width={50}
         height={20}
-        className="mb-[40px]"
+        className="mb-[40px] md:mb-[157px] xl:mb-[107px]"
       ></Image>
-      <h2 className="font-title text-[32px] mb-[20px] leading-none tracking-wide">
+      <h2 className="font-title font-extrabold text-[32px] md:text-[64px] mb-[20px] md:mb-[40px] leading-none tracking-wide">
         Expand your mind, reading{" "}
         <span className="text-[rgba(227,227,227,0.5)]"> a book</span>
       </h2>
@@ -99,7 +115,7 @@ export const LoginForm = () => {
             {errors.root.message}
           </p>
         )}
-        <div className="flex flex-row items-center gap-[14px] mt-[72px]">
+        <div className="flex flex-row items-center gap-[14px] mt-[72px] md:mt-[146hpx]">
           <button
             className="white-button font-main font-bold hover:bg-inputs hover:text-foreground border hover:border-zinc-50/20 py-3 px-11"
             type="submit"
@@ -110,7 +126,7 @@ export const LoginForm = () => {
             className="text-xs font-medium leading-[14px] text-inactive tracking-tight underline hover:text-foreground"
             href="/register"
           >
-            Don’t have an account?
+            Dont have an account?h
           </Link>
         </div>
       </form>

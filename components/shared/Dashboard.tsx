@@ -12,7 +12,7 @@ interface DashboardProps {
 
 export const Dashboard = ({ variant, onApplyFilters }: DashboardProps) => {
   return (
-    <aside>
+    <aside className="flex flex-col bg-blocks p-[20px] rounded-[30px]">
       {variant === "recommended" && onApplyFilters && (
         <RecommendedSidebar onApplyFilters={onApplyFilters} />
       )}
