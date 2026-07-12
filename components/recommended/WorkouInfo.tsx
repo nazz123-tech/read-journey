@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export const WorkoutInfo = () => {
   return (
-    <div className="flex flex-col bg-inputs gap-[20px] p-[20px] rounded-xl">
+    <div className="flex flex-col bg-inputs gap-[20px] p-[20px] rounded-xl md:w-[313px]">
       <h1 className="text-lg  leading-none tracking-tight text-left text-foreground">
         Start your workout
       </h1>
@@ -33,7 +33,7 @@ export const WorkoutInfo = () => {
           </li>
         </ul>
       </div>
-      <div className="flex flex-row justify-between">
+      <div className="flex flex-row justify-between items-center">
         <Link
           className="text-sm font-medium leading-tight tracking-tight underline text-inactive hover:text-foreground"
           href={"/library"}

@@ -73,7 +73,7 @@ export const LoginForm = () => {
         height={20}
         className="mb-[40px] md:mb-[157px] xl:mb-[107px]"
       ></Image>
-      <h2 className="font-title font-extrabold text-[32px] md:text-[64px] mb-[20px] md:mb-[40px] leading-none tracking-wide">
+      <h2 className="font-title text-[32px] mb-[20px] md:text-[64px] md:mb-[40px]  leading-none tracking-wide">
         Expand your mind, reading{" "}
         <span className="text-[rgba(227,227,227,0.5)]"> a book</span>
       </h2>
@@ -126,7 +126,7 @@ export const LoginForm = () => {
             className="text-xs font-medium leading-[14px] text-inactive tracking-tight underline hover:text-foreground"
             href="/register"
           >
-            Dont have an account?h
+            Dont have an account?
           </Link>
         </div>
       </form>

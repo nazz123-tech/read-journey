@@ -19,7 +19,10 @@ export const FiltersForm = ({ onApply }: FiltersFormProps) => {
       <p className="text-foreground  pl-[14px] mb-2 text-[10px] font-medium leading-[12px] tracking-tight">
         Filters:
       </p>
-      <form onSubmit={handleSubmit(onApply)} className="flex flex-col gap-3">
+      <form
+        onSubmit={handleSubmit(onApply)}
+        className="flex flex-col gap-3 md:w-[295px]"
+      >
         <Input
           {...register("title")}
           label="Book title:"

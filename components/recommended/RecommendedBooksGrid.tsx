@@ -21,8 +21,8 @@ export const RecommendedBooksGrid = ({
 }: RecommendedBooksGridProps) => {
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
   return (
-    <div className="flex-1">
-      <div className="flex justify-between items-center mb-4">
+    <div className="flex-1 bg-blocks px-[20px] py-[40px] md:px-[40px] rounded-[30px]">
+      <div className="flex justify-between items-center mb-[28px]">
         <h2 className="text-white text-2xl font-bold">Recommended</h2>
         <div className="flex gap-2">
           <button
@@ -45,7 +45,7 @@ export const RecommendedBooksGrid = ({
       {loading ? (
         <p className="text-gray-400">Loading...</p>
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-[25px]">
           {books.map((book) => (
             <BookCard
               onClick={() => setSelectedBook(book)}
