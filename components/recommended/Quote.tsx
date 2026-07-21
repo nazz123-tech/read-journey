@@ -3,7 +3,7 @@ export const Quote = () => {
   return (
     <div className="hidden xl:flex xl:flex-row items-center bg-inputs gap-[14px] pt-[15px] px-[20px] pb-[14px] rounded-xl">
       <Image
-        src="/quote.png"
+        src="/images/quote.png"
         alt="quote"
         width={40}
         height={40}

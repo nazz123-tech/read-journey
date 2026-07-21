@@ -4,6 +4,7 @@ import { useState } from "react";
 import Modal from "../shared/Modal";
 import { BookPopup } from "../shared/BookPopUp";
 import { Loader } from "../shared/Loader";
+import Icon from "../shared/Icon";
 
 interface RecommendedBooksGridProps {
   books: Book[];
@@ -31,16 +32,24 @@ export const RecommendedBooksGrid = ({
           <button
             onClick={() => onPageChange(page - 1)}
             disabled={page <= 1}
-            className="text-white disabled:opacity-30"
+            className="group text-white disabled:opacity-30 disabled:pointer-events-none border border-zinc-50/20 flex items-center justify-center p-[10px] rounded-full hover:bg-foreground"
           >
-            ←
+            <Icon
+              name="chevron"
+              size={20}
+              className="-rotate-90 group-hover:text-background"
+            />
           </button>
           <button
             onClick={() => onPageChange(page + 1)}
             disabled={page >= totalPages}
-            className="text-white disabled:opacity-30"
+            className="group text-white disabled:opacity-30 disabled:pointer-events-none border border-zinc-50/20 flex items-center justify-center p-[10px] rounded-full hover:bg-foreground"
           >
-            →
+            <Icon
+              name="chevron"
+              size={20}
+              className="rotate-90 group-hover:text-background"
+            />
           </button>
         </div>
       </div>

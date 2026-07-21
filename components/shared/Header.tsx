@@ -42,7 +42,7 @@ export const Header = () => {
             className="hidden md:block"
             height={17}
             alt="logo"
-            src={"/Logo.png"}
+            src={"/images/logo.png"}
           />
           <Image
             width={42}
@@ -87,7 +87,7 @@ export const Header = () => {
             onClick={() => setMenuOpen((prev) => !prev)}
             className="md:hidden"
           >
-            <Image alt="menu" width={28} height={28} src={"/menu.svg"} />
+            <Image alt="menu" width={28} height={28} src={"/images/menu.svg"} />
           </button>
         </div>
       </div>

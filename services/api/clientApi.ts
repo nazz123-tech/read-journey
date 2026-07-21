@@ -35,11 +35,13 @@ export const addToLibrary = async (bookId:string):Promise<void>=> {
   await api.post(`/books/add/${bookId}`)
 }
 
-export const getMyBooks = async (status?: string): Promise<Book[]> => {
-  const { data } = await api.get<Book[]>("/books/own", {
-    params: { status }
-  })
-  return data;
+export const getMyBooks = async (params?: {
+  status?: string
+  page?: number
+  limit?: number
+}): Promise<{ results: Book[]; totalPages: number }> => {
+  const { data } = await api.get("/books/own", { params })
+  return data
 }
 
 export const addOwnBook = async (data: {

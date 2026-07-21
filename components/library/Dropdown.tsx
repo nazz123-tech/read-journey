@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Icon from "../shared/Icon";
 
 const FILTERS = [
   { label: "Unread", value: "unread" },
@@ -27,7 +28,13 @@ export const Dropdown = ({ value, onChange }: DropdownProps) => {
         className="flex items-center gap-[53px] p-3.5 border border-neutral-700 rounded-xl text-white text-sm"
       >
         {current?.label}
-        <span className="text-xs">{open ? "▲" : "▼"}</span>
+        <span className="text-xs">
+          {open ? (
+            <Icon name="chevron" size={16} />
+          ) : (
+            <Icon name="chevron" size={16} className="rotate-180" />
+          )}
+        </span>
       </button>
 
       {open && (
@@ -39,7 +46,7 @@ export const Dropdown = ({ value, onChange }: DropdownProps) => {
                 onChange(f.value);
                 setOpen(false);
               }}
-              className={`block w-full text-left py-[3.5px] text-sm ${
+              className={`block w-full text-left hover:text-zinc-300 py-[3.5px] text-sm ${
                 f.value === value ? "text-foreground" : "text-inactive"
               }`}
             >

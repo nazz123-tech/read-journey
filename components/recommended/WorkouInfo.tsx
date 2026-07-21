@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import Icon from "../shared/Icon";
 
 export const WorkoutInfo = () => {
   return (
@@ -41,7 +41,7 @@ export const WorkoutInfo = () => {
           My library
         </Link>
         <Link href={"/library"}>
-          <Image width={24} height={24} alt="swipe" src={"/login.png"}></Image>
+          <Icon name="arrow" size={24} />
         </Link>
       </div>
     </div>

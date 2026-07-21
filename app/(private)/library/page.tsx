@@ -1,19 +1,30 @@
 "use client";
-import { LibraryBooksGrid } from "@/components/library/LibraryBooksGrid";
 import { Dashboard } from "@/components/shared/Dashboard";
-import { useLibraryBooks } from "../../../services/hooks/useLibraryBooks";
-
+import { LibraryBooksGrid } from "@/components/library/LibraryBooksGrid";
+import { useLibraryBooks } from "@/services/hooks/useLibraryBooks";
 export default function LibraryPage() {
-  const { books, filter, setFilter, loading, refetch } = useLibraryBooks();
+  const {
+    books,
+    filter,
+    page,
+    totalPages,
+    loading,
+    setFilter,
+    goToPage,
+    refetch,
+  } = useLibraryBooks();
 
   return (
-    <div className="flex flex-col xl:flex-row gap-4">
-      <Dashboard variant="library" onApplyFilters={refetch} />
+    <div className="flex flex-col md:flex-row gap-4 p-4">
+      <Dashboard variant="library" onBookAdded={refetch} />
       <LibraryBooksGrid
         books={books}
         filter={filter}
         onFilterChange={setFilter}
         loading={loading}
+        page={page}
+        totalPages={totalPages}
+        onPageChange={goToPage}
       />
     </div>
   );

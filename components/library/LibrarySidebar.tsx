@@ -6,18 +6,18 @@ import { useState } from "react";
 import Image from "next/image";
 
 interface LibrarySidebarProps {
-  onApplyFilters?: (filters: {
-    title?: string;
-    author?: string;
-    totalPages?: number;
-  }) => void;
+  onBookAdded?: () => void;
 }
 
-export const LibrarySidebar = ({ onApplyFilters }: LibrarySidebarProps) => {
+export const LibrarySidebar = ({ onBookAdded }: LibrarySidebarProps) => {
+  const handleBookAdded = () => {
+    setIsBookAdded(true);
+    onBookAdded?.();
+  };
   const [isBookAdded, setIsBookAdded] = useState(false);
   return (
-    <div className="flex flex-col gap-4 ">
-      <AddBookForm onBookAdded={() => setIsBookAdded(true)} />
+    <div className="flex flex-col ">
+      <AddBookForm onBookAdded={handleBookAdded} />
       <RecommendedMiniGrid />
       {isBookAdded && (
         <Modal variant="popup" onClose={() => setIsBookAdded(false)}>

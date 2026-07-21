@@ -11,14 +11,14 @@ export default function LoginPage() {
       <LoginForm />
       <div className="flex items-end justify-center bg-blocks px-[40px] pt-[20px] md:hidden xl:flex rounded-[30px] w-[335px] xl:w-[600px] xl:h-[736px]">
         <Image
-          src="/iphone.png"
+          src="/images/iphone.png"
           alt="iphone"
           width={300}
           height={600}
           className="block xl:hidden"
         />
         <Image
-          src="/iphone-dekstop.png"
+          src="/images/iphone-dekstop.png"
           alt="iphone"
           width={405}
           height={600}

@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Icon from "./Icon";
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
@@ -37,12 +38,12 @@ export const Input = ({
       />
       {error && (
         <span className="text-red-500  shrink-0">
-          <img src="./error.png" />
+          <Icon name="error" size={20} />
         </span>
       )}
       {success && (
         <span className="text-green-500 w-[20px] h-[20px] shrink-0 ">
-          <img src="./success.png" />
+          <Icon name="success" size={20} />
         </span>
       )}
       {status === "password" && (
@@ -52,9 +53,9 @@ export const Input = ({
           onClick={() => setIsVisible((prev) => !prev)}
         >
           {!isVisible ? (
-            <img className="" src="/eye-off.png" />
+            <Icon name="eye-off" size={20} />
           ) : (
-            <img className="" src="/eye.png" />
+            <Icon name="eye" size={20} />
           )}
         </button>
       )}

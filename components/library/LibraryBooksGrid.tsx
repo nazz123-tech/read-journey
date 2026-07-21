@@ -7,6 +7,7 @@ import { LibraryBookPopup } from "./LibraryBookPopup";
 import type { Book } from "@/types/book";
 import { Loader } from "../shared/Loader";
 import { Dropdown } from "../library/Dropdown";
+import Icon from "../shared/Icon";
 
 type FilterType = "all" | "unread" | "in-progress" | "done";
 
@@ -15,6 +16,9 @@ interface MyLibraryBooksProps {
   filter: FilterType;
   onFilterChange: (filter: FilterType) => void;
   loading: boolean;
+  page: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
 }
 
 export const LibraryBooksGrid = ({
@@ -22,6 +26,9 @@ export const LibraryBooksGrid = ({
   filter,
   onFilterChange,
   loading,
+  page,
+  totalPages,
+  onPageChange,
 }: MyLibraryBooksProps) => {
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
   const router = useRouter();
@@ -33,7 +40,34 @@ export const LibraryBooksGrid = ({
           My library
         </h2>
 
-        <Dropdown value={filter} onChange={onFilterChange} />
+        <div className="flex items-center gap-3">
+          <div className="flex gap-2">
+            <button
+              onClick={() => onPageChange(page - 1)}
+              disabled={page <= 1}
+              className="group text-white disabled:opacity-30 disabled:pointer-events-none border border-zinc-50/20 flex items-center justify-center p-[10px] rounded-full hover:bg-foreground"
+            >
+              <Icon
+                name="chevron"
+                size={20}
+                className="-rotate-90 group-hover:text-background"
+              />
+            </button>
+            <button
+              onClick={() => onPageChange(page + 1)}
+              disabled={page >= totalPages}
+              className="group text-white disabled:opacity-30 disabled:pointer-events-none border border-zinc-50/20 flex items-center justify-center p-[10px] rounded-full hover:bg-foreground"
+            >
+              <Icon
+                name="chevron"
+                size={20}
+                className="rotate-90 group-hover:text-background"
+              />
+            </button>
+          </div>
+
+          <Dropdown value={filter} onChange={onFilterChange} />
+        </div>
       </div>
 
       {loading ? (
