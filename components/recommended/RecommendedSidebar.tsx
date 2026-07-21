@@ -10,7 +10,7 @@ export const RecommendedSidebar = ({
   onApplyFilters,
 }: RecommendedSidebarProps) => {
   return (
-    <div className="flex flex-col gap-4 md:flex-row md:gap-8 xl:flex-col">
+    <div className="flex flex-col gap-4 md:flex-row md:gap-8 xl:flex-col xl:gap-5">
       <FiltersForm onApply={onApplyFilters} />
       <WorkoutInfo />
       <Quote />

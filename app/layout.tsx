@@ -2,13 +2,14 @@ import type { Metadata } from "next";
 import { ToastContainer, Bounce } from "react-toastify";
 import "./globals.css";
 import localFont from "next/font/local";
+
 const gilroy = localFont({
   src: "../public/fonts/Gilroy-Medium.ttf",
   variable: "--font-gilroy",
 });
 
 const gilroyBold = localFont({
-  src: "../public/fonts/Gilroy-ExtraBold.otf",
+  src: "../public/fonts/Gilroy-Bold.ttf",
   variable: "--font-gilroy-bold",
 });
 

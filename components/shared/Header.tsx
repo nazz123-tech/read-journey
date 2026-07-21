@@ -74,11 +74,11 @@ export const Header = () => {
           <div className="flex flex-row items-center justify-center bg-inputs border rounded-full w-[35px] h-[35px] border-zinc-50/20 font-bold leading-none tracking-tight text-center font-main">
             {user?.name?.[0]}
           </div>
-          <span className="hidden xl:block font-main font-bold leading-[18px] tracking-tight text-center text-foreground">
+          <span className="hidden xl:block font-title leading-[18px] tracking-tight text-center text-foreground">
             {user?.name}
           </span>
           <button
-            className="hidden md:block black-button w-[91px] h-[38px] md:w-[114px] md:h-[42px] mt-auto font-main font-bold border border-zinc-50/20 hover:bg-foreground hover:text-background hover:border-transparent"
+            className="hidden md:block black-button w-[91px] h-[38px] md:w-[114px] md:h-[42px] mt-auto font-title border border-zinc-50/20 hover:bg-foreground hover:text-background hover:border-transparent"
             onClick={handleLogout}
           >
             Log out
@@ -113,7 +113,7 @@ export const Header = () => {
             </nav>
 
             <button
-              className="black-button w-[91px] h-[38px] mt-auto font-main font-bold border border-zinc-50/20 hover:bg-foreground hover:text-background hover:border-transparent"
+              className="black-button w-[91px] h-[38px] mt-auto font-title border border-zinc-50/20 hover:bg-foreground hover:text-background hover:border-transparent"
               onClick={handleLogout}
             >
               Logout

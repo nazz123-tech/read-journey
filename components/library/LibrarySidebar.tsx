@@ -16,7 +16,7 @@ interface LibrarySidebarProps {
 export const LibrarySidebar = ({ onApplyFilters }: LibrarySidebarProps) => {
   const [isBookAdded, setIsBookAdded] = useState(false);
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 ">
       <AddBookForm onBookAdded={() => setIsBookAdded(true)} />
       <RecommendedMiniGrid />
       {isBookAdded && (

@@ -11,11 +11,7 @@ import Link from "next/link";
 import { toast } from "react-toastify";
 
 export const loginSchema = yup.object({
-  email: yup
-    .string()
-    .email("Невалідний email")
-    .required("Email обовʼязковий")
-    .matches(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/),
+  email: yup.string().email("Невалідний email").required("Email обовʼязковий"),
   password: yup
     .string()
     .min(7, "Мінімум 7 символів")
@@ -40,7 +36,7 @@ export const LoginForm = () => {
   } = useForm<LoginFormData>({
     resolver: yupResolver(loginSchema),
     mode: "onChange",
-    delayError: 500,
+    delayError: 1000,
   });
 
   const onSubmit = async (data: LoginFormData) => {
@@ -90,7 +86,7 @@ export const LoginForm = () => {
           success={!!touchedFields.email && !!watch("email") && !errors.email}
         ></Input>
         {errors.email && (
-          <p className="text-[10px] font-medium leading-[12px] tracking-tight text-destructured pl-[14px]">
+          <p className="text-[10px] font-main leading-[12px] tracking-tight text-destructured pl-[14px]">
             {errors.email.message}
           </p>
         )}
@@ -105,25 +101,25 @@ export const LoginForm = () => {
           }
         ></Input>
         {errors.password && (
-          <p className="text-[10px] font-medium leading-[12px] tracking-tight text-destructured pl-[14px]">
+          <p className="text-[10px] font-main leading-[12px] tracking-tight text-destructured pl-[14px]">
             {errors.password.message}
           </p>
         )}
 
         {errors.root && (
-          <p className="text-[10px] font-medium leading-[12px] tracking-tight text-destructured  pl-[14px]">
+          <p className="text-[10px] font-main leading-[12px] tracking-tight text-destructured  pl-[14px]">
             {errors.root.message}
           </p>
         )}
-        <div className="flex flex-row items-center gap-[14px] mt-[72px] md:mt-[146hpx]">
+        <div className="flex flex-row items-center gap-[14px] mt-[72px] md:mt-[146px] ч">
           <button
-            className="white-button font-main font-bold hover:bg-inputs hover:text-foreground border hover:border-zinc-50/20 py-3 px-11"
+            className="white-button font-title hover:bg-inputs hover:text-foreground border hover:border-zinc-50/20 py-3 px-11"
             type="submit"
           >
             Log in
           </button>
           <Link
-            className="text-xs font-medium leading-[14px] text-inactive tracking-tight underline hover:text-foreground"
+            className="text-xs font-main leading-[14px] text-inactive tracking-tight underline hover:text-foreground"
             href="/register"
           >
             Dont have an account?

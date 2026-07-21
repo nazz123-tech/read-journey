@@ -16,12 +16,12 @@ export const FiltersForm = ({ onApply }: FiltersFormProps) => {
 
   return (
     <div className=" ">
-      <p className="text-foreground  pl-[14px] mb-2 text-[10px] font-medium leading-[12px] tracking-tight">
+      <p className="text-foreground  pl-[14px] mb-2 text-[10px] xl:text-sm font-main leading-[12px] tracking-tight">
         Filters:
       </p>
       <form
         onSubmit={handleSubmit(onApply)}
-        className="flex flex-col gap-3 md:w-[295px]"
+        className="flex flex-col gap-3 md:w-[295px] xl:w-[313px]"
       >
         <Input
           {...register("title")}
@@ -37,7 +37,7 @@ export const FiltersForm = ({ onApply }: FiltersFormProps) => {
         ></Input>
         <button
           type="submit"
-          className="black-button font-main font-bold text-sm border border-zinc-50/20 hover:bg-foreground hover:text-background w-[98px] h-[38px] hover:border-transparent "
+          className="black-button font-title text-[16px] leading-[18px] tracking-wide border border-zinc-50/20 hover:bg-foreground hover:text-background w-[98px] h-[38px] hover:border-transparent "
         >
           To apply
         </button>

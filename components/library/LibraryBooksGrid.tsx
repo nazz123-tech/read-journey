@@ -5,13 +5,8 @@ import { BookCard } from "@/components/shared/BookCard";
 import Modal from "../shared/Modal";
 import { LibraryBookPopup } from "./LibraryBookPopup";
 import type { Book } from "@/types/book";
-
-const FILTERS = [
-  { label: "All books", value: "all" },
-  { label: "Unread", value: "unread" },
-  { label: "In progress", value: "in-progress" },
-  { label: "Done", value: "done" },
-] as const;
+import { Loader } from "../shared/Loader";
+import { Dropdown } from "../library/Dropdown";
 
 type FilterType = "all" | "unread" | "in-progress" | "done";
 
@@ -29,37 +24,20 @@ export const LibraryBooksGrid = ({
   loading,
 }: MyLibraryBooksProps) => {
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
   const router = useRouter();
 
   return (
-    <div>
-      <div>
-        <h2>My library</h2>
-        <div>
-          <button onClick={() => setDropdownOpen((p) => !p)}>
-            {FILTERS.find((f) => f.value === filter)?.label}
-          </button>
-          {dropdownOpen && (
-            <div>
-              {FILTERS.map((f) => (
-                <button
-                  key={f.value}
-                  onClick={() => {
-                    onFilterChange(f.value);
-                    setDropdownOpen(false);
-                  }}
-                >
-                  {f.label}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
+    <div className="xl:w-[847px] xl:h-[651px] px-[20px] py-[40px] md:px-[40px] xl:pb-[28px] bg-blocks rounded-[30px]">
+      <div className="flex flex-row justify-between items-center mb-[28px]">
+        <h2 className="text-white text-[28px] font-title leading-[32px] tracking-wide">
+          My library
+        </h2>
+
+        <Dropdown value={filter} onChange={onFilterChange} />
       </div>
 
       {loading ? (
-        <p>Loading...</p>
+        <Loader />
       ) : books.length === 0 ? (
         <p>Бібліотека порожня. Додай книги!</p>
       ) : (

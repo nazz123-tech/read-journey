@@ -12,11 +12,7 @@ import { toast } from "react-toastify";
 
 export const registerSchema = yup.object({
   name: yup.string().min(2, "Мінімум 2 символи").required("Імʼя обовʼязкове"),
-  email: yup
-    .string()
-    .email("Невалідний email")
-    .required("Email обовʼязковий")
-    .matches(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/),
+  email: yup.string().email("Невалідний email").required("Email обовʼязковий"),
   password: yup
     .string()
     .min(7, "Мінімум 7 символів")
@@ -41,7 +37,7 @@ export const RegisterForm = () => {
   } = useForm<RegisterFormData>({
     resolver: yupResolver(registerSchema),
     mode: "onChange",
-    delayError: 500,
+    delayError: 1500,
   });
 
   const onSubmit = async (data: RegisterFormData) => {
@@ -91,7 +87,7 @@ export const RegisterForm = () => {
             success={!!touchedFields.name && !!watch("name") && !errors.name}
           ></Input>
           {errors.name && (
-            <p className="text-[10px] font-medium leading-[12px] tracking-tight pt-0 text-destructured pl-[14px]">
+            <p className="text-[10px] font-main leading-[12px] tracking-tight pt-0 text-destructured pl-[14px]">
               {errors.name.message}
             </p>
           )}
@@ -106,7 +102,7 @@ export const RegisterForm = () => {
             status="basic"
           ></Input>
           {errors.email && (
-            <p className="text-[10px] font-medium leading-[12px] tracking-tight text-destructured pl-[14px]">
+            <p className="text-[10px] font-main leading-[12px] tracking-tight text-destructured pl-[14px]">
               {errors.email.message}
             </p>
           )}
@@ -125,26 +121,26 @@ export const RegisterForm = () => {
             placeholder="Yourpasswordhere"
           ></Input>
           {errors.password && (
-            <p className="text-[10px] font-medium leading-[12px] tracking-tight text-destructured pl-[14px]">
+            <p className="text-[10px] font-main leading-[12px] tracking-tight text-destructured pl-[14px]">
               {errors.password.message}
             </p>
           )}
         </div>
 
         {errors.root && (
-          <p className="text-[10px] font-medium leading-[12px] tracking-tight text-destructured pl-[14px]">
+          <p className="text-[10px] font-main leading-[12px] tracking-tight text-destructured pl-[14px]">
             {errors.root.message}
           </p>
         )}
         <div className="flex flex-row items-center gap-[14px] mt-[20px] md:mt-[82px]">
           <button
-            className="white-button font-main font-bold py-3 px-11 hover:bg-inputs hover:text-foreground border hover:border-zinc-50/20"
+            className="white-button font-title py-3 px-11 hover:bg-inputs hover:text-foreground border hover:border-zinc-50/20"
             type="submit"
           >
             Registration
           </button>
           <Link
-            className="text-xs font-medium leading-[14px] text-inactive tracking-tight underline hover:text-foreground"
+            className="text-xs font-main leading-[14px] text-inactive tracking-tight underline hover:text-foreground"
             href="/login"
           >
             Have an account?
